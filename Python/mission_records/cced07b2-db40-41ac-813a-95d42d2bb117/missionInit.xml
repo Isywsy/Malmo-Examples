@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<MissionInit xmlns="http://ProjectMalmo.microsoft.com" PlatformVersion="0.30.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ProjectMalmo.microsoft.com MissionInit.xsd">
+  <Mission>
+    <About>
+      <Summary>Run the maze!</Summary>
+    </About>
+    <ModSettings>
+      <MsPerTick>50</MsPerTick>
+    </ModSettings>
+    <ServerSection>
+      <ServerInitialConditions>
+        <AllowSpawning>false</AllowSpawning>
+      </ServerInitialConditions>
+      <ServerHandlers>
+        <FlatWorldGenerator destroyAfterUse="true" forceReset="false" generatorString="3;7,220*1,5*3,2;3;,biome_1" seed=""/>
+        <MazeDecorator>
+          <Seed>random</Seed>
+          <MaterialSeed>random</MaterialSeed>
+          <AllowDiagonalMovement>false</AllowDiagonalMovement>
+          <SizeAndPosition height="180" length="60" scale="1" width="60" xOrigin="0" yOrigin="225" zOrigin="0"/>
+          <StartBlock fixedToEdge="true" height="1" heightVariance="0" type="emerald_block"/>
+          <EndBlock fixedToEdge="true" height="12" heightVariance="0" type="redstone_block"/>
+          <PathBlock colour="WHITE ORANGE MAGENTA LIGHT_BLUE YELLOW LIME PINK GRAY SILVER CYAN PURPLE BLUE BROWN GREEN RED BLACK" height="1" heightVariance="0" type="stone dirt stained_hardened_clay"/>
+          <FloorBlock height="1" heightVariance="0" type="stone" variant="smooth_granite"/>
+          <GapBlock colour="WHITE ORANGE MAGENTA LIGHT_BLUE YELLOW LIME PINK GRAY SILVER CYAN PURPLE BLUE BROWN GREEN RED BLACK" height="3" heightVariance="3" type="lapis_ore stained_hardened_clay air"/>
+          <OptimalPathBlock height="1" heightVariance="0" type="stone" variant="smooth_granite andesite smooth_diorite diorite"/>
+          <SubgoalBlock height="1" heightVariance="0" type="beacon sea_lantern glowstone"/>
+          <GapProbability variance="0.4">0.5</GapProbability>
+          <AddQuitProducer description="finished maze"/>
+          <AddNavigationObservations/>
+        </MazeDecorator>
+        <ServerQuitFromTimeUp description="" timeLimitMs="45000"/>
+        <ServerQuitWhenAnyAgentFinishes description=""/>
+      </ServerHandlers>
+    </ServerSection>
+    <AgentSection mode="Survival">
+      <Name>James Bond</Name>
+      <AgentStart>
+        <Placement pitch="0" x="-204" y="81" yaw="0" z="217"/>
+      </AgentStart>
+      <AgentHandlers>
+        <ContinuousMovementCommands turnSpeedDegs="840">
+          <ModifierList type="deny-list">
+            <command>strafe</command>
+          </ModifierList>
+        </ContinuousMovementCommands>
+      </AgentHandlers>
+    </AgentSection>
+  </Mission>
+  <ExperimentUID/>
+  <ClientRole>0</ClientRole>
+  <ClientAgentConnection>
+    <ClientIPAddress>127.0.0.1</ClientIPAddress>
+    <ClientMissionControlPort>10000</ClientMissionControlPort>
+    <ClientCommandsPort>0</ClientCommandsPort>
+    <AgentIPAddress>127.0.0.1</AgentIPAddress>
+    <AgentMissionControlPort>10776</AgentMissionControlPort>
+    <AgentVideoPort>0</AgentVideoPort>
+    <AgentObservationsPort>10889</AgentObservationsPort>
+    <AgentRewardsPort>10950</AgentRewardsPort>
+  </ClientAgentConnection>
+</MissionInit>

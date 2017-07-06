@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<MissionInit xmlns="http://ProjectMalmo.microsoft.com" PlatformVersion="0.30.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://ProjectMalmo.microsoft.com MissionInit.xsd">
+  <Mission>
+    <About>
+      <Summary>Endermite Apocalypse #9</Summary>
+    </About>
+    <ModSettings>
+      <MsPerTick>20</MsPerTick>
+    </ModSettings>
+    <ServerSection>
+      <ServerInitialConditions>
+        <Time>
+          <StartTime>13000</StartTime>
+          <AllowPassageOfTime>false</AllowPassageOfTime>
+        </Time>
+        <AllowSpawning>true</AllowSpawning>
+        <AllowedMobs>Endermite</AllowedMobs>
+      </ServerInitialConditions>
+      <ServerHandlers>
+        <FlatWorldGenerator destroyAfterUse="true" forceReset="false" generatorString="3;7,220*1,5*3,2;3;,biome_1" seed=""/>
+        <DrawingDecorator>
+          <DrawCuboid type="stone" x1="-31" x2="31" y1="206" y2="226" z1="-31" z2="31"/>
+          <DrawCuboid type="air" x1="-30" x2="30" y1="207" y2="226" z1="-30" z2="30"/>
+          <DrawLine type="mob_spawner" variant="Endermite" x1="-30" x2="30" y1="206" y2="206" z1="-30" z2="-30"/>
+          <DrawLine type="mob_spawner" variant="Endermite" x1="-30" x2="-30" y1="206" y2="206" z1="-30" z2="30"/>
+          <DrawLine type="mob_spawner" variant="Endermite" x1="30" x2="30" y1="206" y2="206" z1="30" z2="-30"/>
+          <DrawLine type="mob_spawner" variant="Endermite" x1="30" x2="-30" y1="206" y2="206" z1="30" z2="30"/>
+          <DrawCuboid type="mob_spawner" variant="Endermite" x1="-1" x2="1" y1="206" y2="206" z1="-1" z2="1"/>
+          <DrawItem type="apple" x="-19" y="210" z="-24"/>
+          <DrawItem type="apple" x="9" y="210" z="-2"/>
+          <DrawItem type="apple" x="-6" y="210" z="25"/>
+          <DrawItem type="apple" x="-28" y="210" z="17"/>
+          <DrawItem type="apple" x="6" y="210" z="-2"/>
+          <DrawItem type="apple" x="21" y="210" z="5"/>
+          <DrawItem type="apple" x="-25" y="210" z="-20"/>
+          <DrawItem type="apple" x="17" y="210" z="-28"/>
+          <DrawItem type="apple" x="-21" y="210" z="-2"/>
+          <DrawItem type="apple" x="-25" y="210" z="-20"/>
+          <DrawItem type="apple" x="-1" y="210" z="-2"/>
+          <DrawItem type="apple" x="22" y="210" z="-22"/>
+          <DrawItem type="apple" x="-21" y="210" z="19"/>
+          <DrawItem type="apple" x="25" y="210" z="16"/>
+          <DrawItem type="apple" x="6" y="210" z="-10"/>
+          <DrawItem type="apple" x="29" y="210" z="-19"/>
+          <DrawItem type="apple" x="5" y="210" z="30"/>
+          <DrawItem type="apple" x="30" y="210" z="-14"/>
+          <DrawItem type="apple" x="30" y="210" z="13"/>
+          <DrawItem type="apple" x="-1" y="210" z="1"/>
+        </DrawingDecorator>
+        <ServerQuitWhenAnyAgentFinishes description=""/>
+      </ServerHandlers>
+    </ServerSection>
+    <AgentSection mode="Survival">
+      <Name>The Hunted</Name>
+      <AgentStart>
+        <Placement pitch="0" x="0.5" y="207" yaw="0" z="0.5"/>
+        <Inventory/>
+      </AgentStart>
+      <AgentHandlers>
+        <ObservationFromFullStats/>
+        <ObservationFromNearbyEntities>
+          <Range name="entities" update_frequency="1" xrange="60" yrange="2" zrange="60"/>
+        </ObservationFromNearbyEntities>
+        <RewardForCollectingItem dimension="0">
+          <Item distribution="" reward="100" type="apple"/>
+        </RewardForCollectingItem>
+        <ContinuousMovementCommands turnSpeedDegs="360"/>
+        <AbsoluteMovementCommands/>
+        <ChatCommands/>
+      </AgentHandlers>
+    </AgentSection>
+  </Mission>
+  <ExperimentUID>predatorExperiment</ExperimentUID>
+  <ClientRole>0</ClientRole>
+  <ClientAgentConnection>
+    <ClientIPAddress>127.0.0.1</ClientIPAddress>
+    <ClientMissionControlPort>10000</ClientMissionControlPort>
+    <ClientCommandsPort>0</ClientCommandsPort>
+    <AgentIPAddress>127.0.0.1</AgentIPAddress>
+    <AgentMissionControlPort>10975</AgentMissionControlPort>
+    <AgentVideoPort>0</AgentVideoPort>
+    <AgentObservationsPort>10299</AgentObservationsPort>
+    <AgentRewardsPort>10775</AgentRewardsPort>
+  </ClientAgentConnection>
+</MissionInit>
