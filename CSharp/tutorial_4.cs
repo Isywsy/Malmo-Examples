@@ -1,4 +1,4 @@
-﻿// ------------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------------
 // Copyright (c) 2016 Microsoft Corporation
 // 
 // Permission is hereby granted, free of charge, to any person obtaining a copy of this software and
@@ -76,7 +76,7 @@ namespace tutorial_4
 
             // Create default Malmo objects:
 
-            AgentHost agent_host = AgentHost();
+            AgentHost agent_host = new AgentHost();
             try
             {
                 agent_host.parse(new StringVector(Environment.GetCommandLineArgs()));
@@ -93,17 +93,69 @@ namespace tutorial_4
                 Environment.Exit(0);
             }
 
-            MissionSpec my_mission = MissionSpec(missionXML, true);
-            MissionRecordSpec my_mission_record = MissionRecordSpec;
+            MissionSpec my_mission = new MissionSpec(missionXML, true);
+            MissionRecordSpec my_mission_record = new MissionRecordSpec();
 
             // Attempt to start a mission:
             int max_retries = 3;
             for(int retry = 0; retry < max_retries; retry++)
             {
-
+                try
+                {
+                    agent_host.startMission(my_mission, my_mission_record);
+                    break;
+                }
+                catch(Exception e)
+                {
+                    if(retry == max_retries)
+                    {
+                        Console.WriteLine("Error starting mission:{0}", e.Message);
+                        Environment.Exit(1);
+                    }
+                    else
+                    {
+                        Thread.Sleep(2000);
+                    }
+                }
             }
+
+            // Loop until mission starts:
+            Console.WriteLine("Waiting for the mission to start ");
+            WorldState world_state = agent_host.getWorldState();
+            while (!world_state.has_mission_begun)
+            {
+                Console.Write(".");
+                Thread.Sleep(100);
+                world_state = agent_host.getWorldState();
+                foreach(TimestampedString error in world_state.errors)
+                {
+                    Console.WriteLine("Error:{0}", error.text);
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Mission running ");
+
+            // ADD YOUR CODE HERE
+            // TO GET YOUR AGENT TO THE DIAMOND BLOCK
+
+            // Loop until mission ends:
+            while (world_state.is_mission_running)
+            {
+                Console.Write(".");
+                Thread.Sleep(100);
+                world_state = agent_host.getWorldState();
+                foreach(TimestampedString error in world_state.errors)
+                {
+                    Console.WriteLine("Error:{0}", error.text);
+                }
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Mission ended");
+            // Mission has ended.
         }
-        public string Menger(int xorg,int yorg,int zorg,int size,string blocktype,string variant,string holetype)
+        static public string Menger(int xorg,int yorg,int zorg,int size,string blocktype,string variant,string holetype)
         {
             // draw solid chunk
             string genstring = GenCuboidWithVariant(xorg, yorg, zorg, xorg + size - 1, yorg + size - 1, zorg + size - 1, blocktype, variant) + "\n";
@@ -129,12 +181,12 @@ namespace tutorial_4
             }
             return genstring;
         }
-        public string GenCuboid(int x1, int y1, int z1, int x2, int y2, int z2, string blocktype)
+        static public string GenCuboid(int x1, int y1, int z1, int x2, int y2, int z2, string blocktype)
         {
             string cuboid = String.Format("<DrawCuboid x1=\"{0}\" y1=\"{1}\" z1=\"{2}\" x2=\"{3}\" y2=\"{4}\" z2=\"{5}\" type=\"{6}\"/>", x1, y1, z1, x2, y2, z2, blocktype);
             return cuboid;
         }
-        public string GenCuboidWithVariant(int x1, int y1, int z1, int x2, int y2, int z2, string blocktype, string variant)
+        static public string GenCuboidWithVariant(int x1, int y1, int z1, int x2, int y2, int z2, string blocktype, string variant)
         {
             string cuboidWithVariant = String.Format("<DrawCuboid x1=\"{0}\" y1=\"{1}\" z1=\"{2}\" x2=\"{3}\" y2=\"{4}\" z2=\"{5}\" type=\"{6}\" variant=\"{7}\"/>", x1, y1, z1, x2, y2, z2, blocktype, variant);
             return cuboidWithVariant;
