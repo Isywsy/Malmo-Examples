@@ -94,8 +94,7 @@ namespace tutorial_4
             }
 
             MissionSpec my_mission = new MissionSpec(missionXML, true);
-            MissionRecordSpec my_mission_record = new MissionRecordSpec();
-
+            MissionRecordSpec my_mission_record = new MissionRecordSpec()
             // Attempt to start a mission:
             int max_retries = 3;
             for(int retry = 0; retry < max_retries; retry++)
@@ -136,7 +135,7 @@ namespace tutorial_4
             Console.WriteLine();
             Console.WriteLine("Mission running ");
 
-            agent_host.sendCommand("hotbad.9 1");
+            agent_host.sendCommand("hotbar.9 1");
 			agent_host.sendCommand("hotbar.9 0");
 			
 			agent_host.sendCommand("pitch 0.2");
